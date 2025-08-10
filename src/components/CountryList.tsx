@@ -7,21 +7,18 @@ interface Props {
 }
 
 function CountryList({ items, heading, onSelectItem }: Props) {
-  //hook
   const [selectedIndex, setSelectedIndex] = useState(-1);
 
   return (
-    <>
-      <h3>{heading}</h3>
-      {items.length === 0 && <p>No countries found</p>}
-      <ul className="list-group">
+    <div className="card shadow-sm">
+      <div className="card-header fw-bold">{heading}</div>
+      <ul className="list-group list-group-flush">
         {items.map((item, index) => (
           <li
             key={item}
             className={
-              selectedIndex === index
-                ? "list-group-item active"
-                : "list-group-item"
+              "list-group-item list-group-item-action " +
+              (selectedIndex === index ? "active" : "")
             }
             style={{ cursor: "pointer" }}
             onClick={() => {
@@ -33,7 +30,7 @@ function CountryList({ items, heading, onSelectItem }: Props) {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }
 

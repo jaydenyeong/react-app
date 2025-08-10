@@ -8,11 +8,12 @@ interface Props {
 function UploadPhoto({ country, onUpload }: Props) {
   const [file, setFile] = useState<File | null>(null);
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFile(e.target.files[0]);
     }
   };
+
   const handleUpload = () => {
     if (!file) return;
     const reader = new FileReader();
@@ -24,11 +25,21 @@ function UploadPhoto({ country, onUpload }: Props) {
     };
     reader.readAsDataURL(file);
   };
+
   return (
-    <div style={{ margin: "10px 0" }}>
-      <input type="file" accept="image/*" onChange={handleFileChange} />
-      <button onClick={handleUpload} disabled={!file}>
-        Upload Photo
+    <div className="mb-3 d-flex gap-2">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleChange}
+        className="form-control"
+      />
+      <button
+        onClick={handleUpload}
+        disabled={!file}
+        className="btn btn-primary"
+      >
+        Upload
       </button>
     </div>
   );
